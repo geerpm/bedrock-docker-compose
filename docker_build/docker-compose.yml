@@ -31,5 +31,15 @@ networks:
     external: true
     name: mysql_default
   kuji:
+
+## Local Development
+# volumes:
+#   shared-volume:
+#     driver_opts:
+#       type: none
+#       device: /abs/path/to/bedrock/dir
+#       o: bind
+
+## Building Image for Deploy
 volumes:
   shared-volume:
