@@ -1,6 +1,18 @@
 
 # Bedrock and Docker Compose Sample
 
+## Fisrtly, run mysql container
+
+- `docker_mysql/docker-compose.yml` の `volumes` の `:` 左辺を自分のホストのmysqlデータディレクトリに設定する。あるいは `volumes` 設定自体を削除する（全てコンテナ内包）。あるいはお好みでmysql立てる
+- mysqlコンテナを起動する。
+
+```sh
+cd docker_mysql
+docker-compose up -d
+```
+
+- `docker_build/docker-compose.yml` の `networks.mysql.name` に上記で稼働したまたは別途設定しているmysqlへアクセスできるネットワークの設定を加える。（もとの `docker_mysql/docker-compose.yml` をそのまま起動してたら `mysql_default` のままで大丈夫なはず）
+
 ## Local build and run
 
 - imageをビルドして稼働させる
