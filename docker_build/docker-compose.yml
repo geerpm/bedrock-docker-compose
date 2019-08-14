@@ -13,6 +13,8 @@ services:
     restart: always
     networks:
       - kuji
+    volumes:
+      - shared-volume:/app/bedrock
   app:
     image: kuji-app
     build:
@@ -22,8 +24,12 @@ services:
     networks:
       - kuji
       - mysql
+    volumes:
+      - shared-volume:/app/bedrock
 networks:
   mysql:
     external: true
     name: mysql_default
   kuji:
+volumes:
+  shared-volume:
