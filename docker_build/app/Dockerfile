@@ -30,6 +30,8 @@ RUN apk add --no-cache --virtual .additional-deps $PHPIZE_DEPS \
 
 ENV LD_PRELOAD /usr/bin/lib/preloadable_libiconv.so
 
+COPY ./docker_build/app/php.ini /usr/local/etc/php
+
 # composer
 
 ADD ./docker_build/app/composer-install.sh /app/composer-install.sh
@@ -48,16 +50,21 @@ WORKDIR $APP_DIR
 
 RUN mv -n /tmp/vendor $APP_DIR/vendor && composer dump-autoload
 
-RUN echo $APP_VERSION
-
 RUN chown -R www-data.www-data $APP_DIR
-
 
 # install wp cli
 ADD ./docker_build/app/wp-cli-2.3.0.phar ./wp-cli.phar
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 RUN wp --info
+
+# wpパッケージのインストールが特殊なので、ここで再度実行（上記の実行を上書き）
+RUN composer install
+COPY ./bedrock/.env $APP_DIR/.env
+
+## debug
+# RUN apk add mysql-client
+
 
 # ここでユーザが変わる
 USER www-data
