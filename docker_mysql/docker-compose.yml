@@ -1,0 +1,10 @@
+version: "3.2"
+services:
+  mysql:
+    image: mysql
+    volumes:
+      - "~/repo/.dev/mysql:/var/lib/mysql"
+    ports:
+      - "3306:3306"
+    expose:
+      - 33060

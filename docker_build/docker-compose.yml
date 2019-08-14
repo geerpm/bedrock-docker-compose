@@ -1,0 +1,29 @@
+version: "3.7"
+services:
+  nginx:
+    image: "kuji-nginx"
+    build:
+      context: ../
+      dockerfile: ./docker_build/nginx/Dockerfile
+    ports:
+      - "80:80"
+      - "81:81"
+    depends_on:
+      - app
+    restart: always
+    networks:
+      - kuji
+  app:
+    image: kuji-app
+    build:
+      context: ../
+      dockerfile: ./docker_build/app/Dockerfile
+    restart: always
+    networks:
+      - kuji
+      - mysql
+networks:
+  mysql:
+    external: true
+    name: mysql_default
+  kuji:
