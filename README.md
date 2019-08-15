@@ -5,7 +5,7 @@
 
 1. このrepositoryをclone
 2. mysqldをなんらかの方法で立てる
-   - [dockerで。](#fisrtly-run-mysql-container)
+   - [dockerで。](#run-mysql-container)
    - ホストでmysqldたててれば、コンテナからは`0.0.0.0`等でアクセスできるはず
 3. [#development-build-開発用の編集可能ビルド](#development-build-開発用の編集可能ビルド)の手順でdocker-compose up
 4. [Sage themeを使う場合](#sageのテンプレート開発)
