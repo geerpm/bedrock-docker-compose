@@ -55,3 +55,7 @@ volumes:
 cd docker_build
 docker-compose down -v --remove-orphans && docker-compose up --build
 ```
+
+3. 開発
+   - `bedrock` 配下を編集するとreloadで反映される
+   - プラグイン等はcomposer installする
